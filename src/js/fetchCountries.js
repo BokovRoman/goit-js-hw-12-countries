@@ -1,20 +1,11 @@
-import countriesCardTpl from '../templates/countries-card.hbs';
+const BASE_URL = 'https://restcountries.eu/rest/v2';
 
-const refs = {
-    cardContainer:document.querySelector('.js-card-container')
-}
-
-fetch('https://restcountries.eu/rest/v2/name/Ukraine')
+function fetchCountriesByName(countryName) {
+    return fetch(`${BASE_URL}/name/${countryName}`)
     .then(response => {
     // console.log(response.json());
     return response.json();
 })
-    .then(country => {
-        console.log(country);
-        const markup = countriesCardTpl(country);
-        console.log(markup);
-        refs.cardContainer.innerHTML=markup;
-    })
-    .catch(error => {
-        console.log(error);
-    })
+}
+
+export default { fetchCountriesByName };
