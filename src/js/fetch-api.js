@@ -14,7 +14,7 @@ refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 function onSearch(e) {
     const searchQuery = e.target.value;
     // console.log(searchQuery);
-
+    pasteInputMarkup('');
     API.fetchCountriesByName(searchQuery)
     .then(responseRenderProcess)
     .catch(onFetchError);
@@ -42,6 +42,7 @@ function responseRenderProcess(response) {
     if (response.length > 1 && response.length < 10) {
         renderCountryList(response);
         showNotice();
+
     }
     else if (response.length > 10) {
         showNotice();
@@ -54,4 +55,8 @@ function responseRenderProcess(response) {
         showError();
     }
     
+}
+
+function pasteInputMarkup(inputMarkup) {
+    refs.cardContainer.innerHTML = inputMarkup;
 }
